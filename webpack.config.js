@@ -9,18 +9,22 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel-loader'
+                loader: 'babel-loader',
+                query: {compact: false}
             },
             {   
                 test: /\.css$/, 
-                loader: "style-loader!css-loader" 
+                loader: "style-loader!css-loader" ,
+                query: {compact: false}
             },
             {
                 test: /\.(jpg|png|svg)$/,
                 use: {
                   loader: 'url-loader',
                 },
+                query: {compact: false}
               },
+
         ]
     },
     plugins: [new HtmlWebpackPlugin({
