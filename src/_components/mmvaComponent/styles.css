@@ -1,0 +1,56 @@
+.dato-basico .label{
+    color: #333;
+	font-size: 20px;
+    margin-bottom: 0;
+}
+.dato-basico .option{
+	font-size: 30px;
+    font-weight: bold;
+}
+
+.main-card{
+	background-color: #FFF;
+    -webkit-box-shadow: 0px 4px 29px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 4px 29px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 4px 29px 0px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+	.main-card .domain{
+		    background-color: #363636;
+			font-size: 55px;
+			color: #FFF;
+			padding: 8px 0px;
+			border-radius: 13px;
+    }
+    
+    .w100p{
+        width: 100%;
+    }
+
+    .w90p{
+        width: 90%;
+    }
+
+    .w100 {
+        width: 100px;
+    }
+
+    .fz-30{
+        font-size: 30px;
+    }
+
+    .fz-25,
+    .fz-25 p{
+        font-size: 25px;
+    }
+
+    .title{
+        color: var(--main-blue);
+        text-transform: uppercase;
+        font-size: 60px;
+        font-weight: bold;
+    }
+
+    .pt-6{
+        padding-top: 4.5rem!important;
+    }

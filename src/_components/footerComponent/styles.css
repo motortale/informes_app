@@ -1,0 +1,17 @@
+.fz-40{
+	font-size: 40px;
+}
+
+.fz-30,
+.btn.fz-30 {
+	font-size: 30px;
+}
+
+.footer{
+	background-color: #404040;
+    color: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    font-size: 20px;
+}
+
