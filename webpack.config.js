@@ -13,12 +13,12 @@ module.exports = {
             },
             {   
                 test: /\.css$/, 
-                loader: "style-loader!css-loader" ,
+                loader: "style-loader!css-loader",
             },
             {
                 test: /\.(jpg|png|svg)$/,
                 use: {
-                  loader: 'url-loader'
+                  loader: 'url-loader',
                 }
               },
 
