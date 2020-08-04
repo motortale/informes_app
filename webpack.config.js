@@ -21,8 +21,8 @@ module.exports = {
                 test: /\.(jpg|png|svg)$/,
                 use: {
                   loader: 'url-loader',
-                },
-                query: {compact: false}
+                  query: {compact: false}
+                }
               },
 
         ]
