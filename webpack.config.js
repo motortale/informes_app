@@ -10,12 +10,10 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                query: {compact: false}
             },
             {   
                 test: /\.css$/, 
                 loader: "style-loader!css-loader" ,
-                query: {compact: false}
             },
             {
                 test: /\.(jpg|png|svg)$/,
