@@ -39,5 +39,6 @@ module.exports = {
         config: JSON.stringify({
             apiUrl: 'http://api.motortale.com/api'//'https://localhost:44315/api' //
         })
-    }
+    },
+    entry: './src/index.jsx'
 }
