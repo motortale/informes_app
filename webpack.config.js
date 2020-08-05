@@ -1,15 +1,18 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    // mode: 'development',
+    mode: 'development',
     resolve: {
         extensions: ['.js', '.jsx']
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                loader: 'babel-loader',
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: "babel-loader"
+                }
             },
             {   
                 test: /\.css$/, 
