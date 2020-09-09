@@ -1,0 +1,11 @@
+.mt-card {
+    background-color: #666;
+    color: #FFF;
+    text-align: center;
+    padding: 40px 8%;
+    border-radius: 40px;
+}
+
+div.card{
+    border: none;
+}

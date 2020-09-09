@@ -37,7 +37,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://api.motortale.com/api'//'https://localhost:44315/api' //
+            apiUrl: 'https://localhost:44315/api' //'http://api.motortale.com/api'//
         })
     },
     entry: './src/index.jsx'

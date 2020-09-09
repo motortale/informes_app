@@ -1,7 +1,6 @@
 import { vehiculoService } from "../_services";
 import { vehiculoConstants } from "../_constants"
 import config from 'config';
-import { authHeader } from '../_helpers';
 
 export const vehiculoActions = {
     geteventosbydominio,

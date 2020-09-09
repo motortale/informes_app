@@ -1,7 +1,5 @@
 import React from 'react';
 import './styles.css'
-import { qr } from "./../../images/qr.png"
-
 
 const FooterComponent = () => {
     return (
@@ -20,7 +18,7 @@ const FooterComponent = () => {
                 <div className="row footer">
                     <div className="col-md-6 text-left">
                         <div>© Motortale</div>
-                        <div>Developed by Folka Media</div>
+                        <div>Developed by MOTORTALE Team</div>
                     </div>
                     <div className="col-md-6 fz-40 text-right">
                         <a href="#" className="fa fa-envelope"></a>
@@ -31,9 +29,5 @@ const FooterComponent = () => {
             </div>
     )
 }
-
-FooterComponent.propTypes = {
-
-};
 
 export default FooterComponent;

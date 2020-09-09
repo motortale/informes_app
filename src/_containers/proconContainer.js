@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import config from 'config';
-import { authHeader } from '../_helpers';
 import { connect } from 'react-redux';
 import ProConComponent from './../_components/proconComponent'
+import PropTypes from 'prop-types';
 
 class ProConContainer extends Component {
 
     render() {
         return (
-            <div className="text-center">
+            <div>
                     {
-                        !this.props.payload ? <p contenteditable="true">No hay ProCons</p> : <ProConComponent procon={this.props.payload} />
+                        !this.props.payload ? <p contentEditable="true" suppressContentEditableWarning={true}>No hay ProCons</p> : <ProConComponent procon={this.props.payload} />
                     }
             </div>
         );
@@ -18,8 +17,19 @@ class ProConContainer extends Component {
 }
 
 ProConContainer.propTypes = {
-
-};
+    payload: PropTypes.arrayOf(PropTypes.shape({
+        descripcion: PropTypes.string.isRequired,
+        evento:  PropTypes.string,
+        eventoDescripcion:  PropTypes.string,
+        eventoGrupo:  PropTypes.string,
+        fechaReporte:  PropTypes.string,
+        fechaSuceso:  PropTypes.string,
+        gravedad:  PropTypes.number,
+        gravedadInforme:  PropTypes.number,
+        id_Evento:  PropTypes.number,
+        id_EventoGrupo:  PropTypes.number
+    }))
+}
 
 function mapStateToProps(state) {
     const { procon } = state;

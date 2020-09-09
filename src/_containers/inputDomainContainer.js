@@ -36,14 +36,8 @@ class InputDomainContainer extends Component {
       }
 }
 
-InputDomainContainer.propTypes = {
-
-};
-
-
 const mapDispatchToProps = dispatch => ({
     dispatch                // ← Add this
  })
  
 export default connect(null, mapDispatchToProps)(InputDomainContainer) 
-//export default InputDomainContainer

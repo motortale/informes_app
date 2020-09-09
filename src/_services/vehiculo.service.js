@@ -15,7 +15,7 @@ function geteventosbydominio(dominio)
         headers: authHeader()
 
     }
-    return fetch(`${config.apiUrl}/vehiculo/geteventosbydominio/${dominio}`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/vehiculo/geteventosbydominio?dominio=${dominio}`, requestOptions).then(handleResponse)
 }
 
 function getrecallsbydominio(dominio) 
@@ -24,7 +24,7 @@ function getrecallsbydominio(dominio)
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`${config.apiUrl}/vehiculo/getrecallsbydominio/${dominio}`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/vehiculo/getrecallsbydominio?dominio=${dominio}`, requestOptions).then(handleResponse)
 }
 
 function getmarcamodeloversionanobydominio(dominio) 
@@ -33,7 +33,7 @@ function getmarcamodeloversionanobydominio(dominio)
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`${config.apiUrl}/vehiculo/getmarcamodeloversionanobydominio/${dominio}`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/vehiculo/getmarcamodeloversionanobydominio?dominio=${dominio}`, requestOptions).then(handleResponse)
 }
 
 function getproconbydominio(dominio) 
@@ -42,7 +42,7 @@ function getproconbydominio(dominio)
         method: 'GET',
         headers: authHeader()
     }
-    return fetch(`${config.apiUrl}/vehiculo/getproconbydominio/${dominio}`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/vehiculo/getproconbydominio?dominio=${dominio}`, requestOptions).then(handleResponse)
 }
 
 
