@@ -26,6 +26,10 @@ const FooterComponent = () => {
                         <a href="#" className="fa fa-instagram ml-4"></a>
                     </div>
                 </div>
+                
+                <div className="text-center">
+                    Copyright © 2020 by <a href="motortale.com">motortale.com</a>
+                </div>
             </div>
     )
 }
