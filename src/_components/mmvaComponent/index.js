@@ -25,7 +25,7 @@ const MmvaComponent = ({mmva: {dominio, marca, tipoVehiculo, modelo, version, an
                             <p contentEditable="true" suppressContentEditableWarning={true}>#2043</p>
                         </div>
                         <div className="col-md-4 text-center">
-                            <div className="domain">{dominio}</div>
+                            <div className="domain"><b>{dominio}</b></div>
                         </div>
                         <div className="col-md-4 text-center">
                             <img src={qr} alt="imagen_qr" className="w100"/>

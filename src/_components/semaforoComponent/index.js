@@ -32,7 +32,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p>Bandera Verde</p>
+                    <p><b>BANDERA VERDE</b></p>
                 </div>
             }
 
@@ -53,7 +53,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p>Bandera Amarilla</p>
+                    <p><b>BANDERA AMARILLA</b></p>
                 </div>
             }
 
@@ -75,7 +75,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p>Bandera Roja</p>
+                    <p><b>BANDERA ROJA</b></p>
                 </div>
             }
 

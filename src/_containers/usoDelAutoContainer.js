@@ -18,7 +18,7 @@ class UsoDelAutoContainer extends Component {
                 {descripcion: item.descripcion, fechaSuceso: item.fechaSuceso, gravedadInforme: item.gravedadInforme}
             ))
 
-            if (this.props.payload.filter(item => item.id_evento == eventoConstants.SINIESTRO).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0) 
                 eventos.push(
                     {
                         descripcion: "No se han reportado siniestros en el historial del vehículo", 
@@ -27,7 +27,7 @@ class UsoDelAutoContainer extends Component {
                     }
                 )
 
-            if (this.props.payload.filter(item => item.id_evento == eventoConstants.TRANSFERENCIA).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.TRANSFERENCIA).length == 0) 
                 eventos.push(
                     {
                         descripcion: "No se ha reportado cambio de dueño/radicación.", 

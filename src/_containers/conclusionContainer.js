@@ -26,6 +26,7 @@ class ConclusionContainer extends Component {
                     {
                         id_evento: evento.id_Evento,
                         id_evento_grupo: evento.id_EventoGrupo,
+                        gravedadInforme: evento.gravedadInforme,
                         cantidad: 1
                     }
                 )
@@ -38,9 +39,18 @@ class ConclusionContainer extends Component {
     crearOraciones(eventosAgrupados){
 
         if (eventosAgrupados.length > 0){
+
             var fue_taxi = eventosAgrupados.filter(x => x.id_evento == eventoConstants.TAXI).length > 0
             var tuvo_gnc = eventosAgrupados.filter(x => x.id_evento == eventoConstants.GNC).length > 0
 
+            if (fue_taxi && tuvo_gnc) 
+                this.state.conclusion.push(`En el vehículo se ha reportado instalación de GNC y uso como taxi. Esto puede llevar al vehículo a experimentar severo desgaste mecánico.`)
+            
+            if (!fue_taxi && !tuvo_gnc) 
+                this.state.conclusion.push(`Este vehículo no ha reportado instalación de GNC o uso como taxi, lo que indica que estos no son factores de riesgo en la mecánica.`)
+
+
+            //Infracciones               
             var cantidad_infraccion_otra = 0
             var cantidad_infraccion_velocidad = 0
             
@@ -52,14 +62,6 @@ class ConclusionContainer extends Component {
             
             var cantidad_total_infracciones = cantidad_infraccion_velocidad + cantidad_infraccion_otra
             
-            
-            if (fue_taxi && tuvo_gnc) 
-                this.state.conclusion.push(`En el vehículo se ha reportado instalación de GNC y uso como taxi. Esto puede llevar al vehículo a experimentar severo desgaste mecánico.`)
-            
-            if (!fue_taxi && !tuvo_gnc) 
-                this.state.conclusion.push(`Este vehículo no ha reportado instalación de GNC o uso como taxi, lo que indica que estos no son factores de riesgo en la mecánica.`)
-
-            // Multas
             if (cantidad_total_infracciones > 0 && cantidad_total_infracciones == 0) 
                 this.state.conclusion.push(`No se han reportado multas para este vehículo, esto siempre es un indicio positivo.`)
             
@@ -74,7 +76,24 @@ class ConclusionContainer extends Component {
 
             if (cantidad_total_infracciones > 0 && cantidad_total_infracciones > 10  && cantidad_infraccion_velocidad >= 5) 
                 this.state.conclusion.push(`Se han reportado muchas multas y de alta severidad en el historial, lo que puede indicar un uso mucho más exigido para la distancia recorrida.`)
-            //Fin Multas
+            //Fin Infracciones
+
+
+            // Siniestros
+            var tiene_siniestros_leves = eventosAgrupados.filter(x => x.id_evento == eventoConstants.SINIESTRO && x.gravedadInforme == 1).length > 0
+            var tiene_siniestros_moderado = eventosAgrupados.filter(x => x.id_evento == eventoConstants.SINIESTRO && x.gravedadInforme == 2).length > 0
+            var tiene_siniestros_severo = eventosAgrupados.filter(x => x.id_evento == eventoConstants.SINIESTRO && x.gravedadInforme == 3).length > 0
+            
+            if(tiene_siniestros_leves)
+                this.state.conclusion.push(`Se ha reportado un SINIESTRO leve. Los daños leves son daños que no afectan el funcionamiento o la estructura del auto, sino que son meramente estéticos. Verificar que haya sido reparado correctamente.`)
+
+            if(tiene_siniestros_moderado)
+                this.state.conclusion.push(`Se ha reportado un SINIESTRO moderado, el mismo implica un daño que afecte la estructura o el funcionamiento del auto, o daños estéticos muy grandes. Son daños reparables sin dejar mayores secuelas. Verificar que haya sido reparado correctamente.`)
+
+            if(tiene_siniestros_severo)
+                this.state.conclusion.push(`Se ha reportado un SINIESTRO severo, los vehículos que han reportado daño severo suelen ser muy dificiles de reparar correctamente, generando potenciales problemas a futuro.`)
+
+            // Fin Siniestros
 
 
             if (eventosAgrupados.filter(x => x.id_evento_grupo == eventogrupoConstants.MANTENIMIENTO ).length == 0)
@@ -107,7 +126,7 @@ class ConclusionContainer extends Component {
                             break;
 
                         case eventoConstants.TAXI:
-                            this.state.conclusion.push(`En el vehículo se ha reportado uso como taxi. Este tipo de uso implica mucho kilometraje recorrido en zonas urbanas, lo que puede llevar a un severo desgaste mecánico.`)
+                            this.state.conclusion.push(`En el vehículo se ha reportado uso como taxi/cabify. Este tipo de uso implica mucho kilometraje recorrido en zonas urbanas, lo que puede llevar a un severo desgaste mecánico.`)
                             break;
 
                         case eventoConstants.MODIFICACION:
@@ -122,9 +141,9 @@ class ConclusionContainer extends Component {
                             this.state.conclusion.push("El vehiculo tiene una transferencia reportada, lo que significa que no es primer/único dueño.")
                             break;  
 
-                        case eventoConstants.SINIESTRO:
-                            this.state.conclusion.push("CAMBIAR - El vehiculo tuvo siniestros")
-                            break; 
+                        // case eventoConstants.SINIESTRO:
+                        //     this.state.conclusion.push("CAMBIAR - El vehiculo tuvo siniestros")
+                        //     break; 
 
                         case eventoConstants.GNC:
                             this.state.conclusion.push("En el vehículo se ha reportado instalación de GNC. Si bien el GNC moderno no suele generar desgaste, el uso y mantenimiento que se le suele dar a los autos equipados con este sistema sí.")
@@ -132,6 +151,10 @@ class ConclusionContainer extends Component {
                             
                         case eventoConstants.DEUDA_PATENTE:
                             this.state.conclusion.push("Se han detectado deudas de patente superiores al 10% del valor del vehículo en períodos pasados. En muchos casos, esto suele ser indicador de un vehículo que ha permanecido gran cantidad de tiempo sin circular o suele ser un indicador de un vehículo que pudo no haber sido mantenido correctamente.")
+                            break; 
+                        
+                        case eventoConstants.KILOMETRAJE:
+                            this.state.conclusion.push("Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a xxx.xxx kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente (xxx.xxx/año reporte - año vehículo * 2020 - año vehículo) kms. al día de la fecha.")
                             break; 
                         
                         case eventoConstants.ROBO:
@@ -149,7 +172,7 @@ class ConclusionContainer extends Component {
 
     render() {
         const eventosAgrupados = this.props.payload ? 
-        this.agruparEventos(this.props.payload.map(({id_Evento, id_EventoGrupo }) => ({id_Evento, id_EventoGrupo })))  : []
+            this.agruparEventos(this.props.payload.map(({id_Evento, id_EventoGrupo, gravedadInforme }) => ({id_Evento, id_EventoGrupo, gravedadInforme })))  : []
 
         this.crearOraciones(eventosAgrupados)
 

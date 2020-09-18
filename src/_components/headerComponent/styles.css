@@ -6,8 +6,11 @@
 }
 
 .title{
-	color: var(--main-blue);
 	text-transform: uppercase;
-	font-size: 60px;
+	font-size: 54px;
     font-weight: bold;
+}
+
+.blue{
+    color: var(--main-blue);
 }

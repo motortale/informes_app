@@ -16,7 +16,7 @@
     border-radius: 15px;
 }
 	.main-card .domain{
-		    background-color: #363636;
+		    background-color: #222223;
 			font-size: 55px;
 			color: #FFF;
 			padding: 8px 0px;
@@ -47,7 +47,7 @@
     .title{
         color: var(--main-blue);
         text-transform: uppercase;
-        font-size: 60px;
+        font-size: 54px;
         font-weight: bold;
     }
 

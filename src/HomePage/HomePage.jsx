@@ -21,11 +21,11 @@ class HomePage extends Component {
     render() {
         return (
             <div className="text-center">
-                <div className="container  pt-3">
-                    <div className="col-md-6 text-left">
+                <div className="container pt-3">
+                    <div className="col-md-8 text-left">
                         <InputDomainContainer />
                     </div>
-                    <div className="col-md-6 text-right">
+                    <div className="col-md-4 text-right">
                         <Link to="/login">Logout</Link>
                     </div>
                 </div>
