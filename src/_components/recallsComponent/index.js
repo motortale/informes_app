@@ -26,14 +26,14 @@ class RecallsComponet extends Component {
             <div>
                 <a href="#" onClick={this.toggleModal} className="fsize20"> 
                     Recalls
-                    <span class="badge badge-danger ml-1 va-super"> 
+                    <span className="badge badge-danger ml-1 va-super"> 
                         { 
                             recalls ? recalls.length : 0
                         }
                     </span>
                    
                 </a>
-                <Modal isOpen={this.state.abierto} fade={false} toggle={this.toggleModal} >
+                <Modal isOpen={this.state.abierto} fade={false} toggle={this.toggleModal}>
                     <ModalHeader>Recalls</ModalHeader>
                         <ModalBody>
                         {
