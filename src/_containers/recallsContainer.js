@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import RecallsComponent from './../_components/recallsComponent'
 
 class RecallsContainer extends Component {
 
     render() {
         return (
-            <div className="text-center">
-                    {
-                        !this.props.payload || !this.props.payload.length ? <p contentEditable="true" suppressContentEditableWarning={true}>No hay recalls</p> :
-                        
-                            this.props.payload.map((item, i) =>
-                                <p key={i} contentEditable="true" suppressContentEditableWarning={true}>
-                                    Motivo: {item.motivo.toString()} - Solución: {item.solucion.toString()}
-                                </p>
-                            
-                        ) 
-                    }
+            <div className="text-center mt-5">
+                <RecallsComponent recalls={this.props.payload}></RecallsComponent>
             </div>
         );
     }
@@ -25,7 +17,7 @@ class RecallsContainer extends Component {
 
 RecallsContainer.propTypes = {
     payload: PropTypes.arrayOf(PropTypes.shape({
-        descripcion: PropTypes.string.isRequired,
+        descripcion: PropTypes.string,
         evento:  PropTypes.string,
         eventoDescripcion:  PropTypes.string,
         eventoGrupo:  PropTypes.string,

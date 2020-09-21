@@ -68,7 +68,7 @@ class CambiosPreviosContainer extends Component {
 
 CambiosPreviosContainer.propTypes = {
     payload: PropTypes.arrayOf(PropTypes.shape({
-        descripcion: PropTypes.string.isRequired,
+        descripcion: PropTypes.string,
         evento:  PropTypes.string,
         eventoDescripcion:  PropTypes.string,
         eventoGrupo:  PropTypes.string,

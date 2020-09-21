@@ -1,0 +1,9 @@
+.modal{ display:block !important; }
+
+.fsize20 {
+    font-size: 20px;
+}
+
+.va-super{
+    vertical-align: super;
+}

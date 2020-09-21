@@ -95,7 +95,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
 SemaforoComponent.propTypes = {
     headertext: PropTypes.string.isRequired,
     eventos: PropTypes.arrayOf(PropTypes.shape({
-        descripcion: PropTypes.string.isRequired,
+        descripcion: PropTypes.string,
         evento:  PropTypes.string,
         eventoDescripcion:  PropTypes.string,
         eventoGrupo:  PropTypes.string,

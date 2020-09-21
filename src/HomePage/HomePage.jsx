@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import EventosContainer from '../_containers/eventosContainer'
 import InputDomainContainer from '../_containers/inputDomainContainer'
 import RecallsContainer from '../_containers/recallsContainer'
 import MmvaContainer from '../_containers/mmvaContainer'
@@ -32,11 +31,8 @@ class HomePage extends Component {
                 <hr />
                 <HeaderComponent />
                 <MmvaContainer />
-                {/* <h2 className="mt-5">Eventos</h2>
-                <EventosContainer /> */}
-                <h2 className="mt-5">Recalls</h2>
-                <RecallsContainer />
                 <ProConContainer/>
+                <RecallsContainer />
                 <CambiosPreviosContainer />
                 <UsoDelAutoContainer />
                 <MantenimientoContainer />
