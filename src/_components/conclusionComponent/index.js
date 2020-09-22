@@ -9,7 +9,7 @@ const ConclusionComponent = ( {oraciones} ) => {
         <div className="bggray pt-4">
             <div className="container main-card p-5 ">
                 <img src={conclusionicon} alt="" />
-                <h3 className="mt-4">Conclusión</h3>
+                <h3 className="mt-4 fs35">Conclusión</h3>
                 
                 { oraciones.map( (x, i) => <p key={i}>{x}</p> )}
                 

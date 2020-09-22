@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import uso from './../images/mantenimiento-icon.svg'
+import mantenimiento from './../images/mantenimiento-icon.svg'
+import gear from './../images/gear-icon.svg'
 import SemaforoComponent from './../_components/semaforoComponent'
 import { eventogrupoConstants, eventoConstants, semaforoConstants } from '../_constants'
 
@@ -9,7 +10,7 @@ class MantenimientoContainer extends Component {
 
     render() {
         const eventos = []
-        const headertext = "Acá va el texto que va a decir qué son los cambios previos"
+        const headertext = "Acá va el texto que va a decir qué es el mantenimiento"
 
         if (this.props.payload) {
             
@@ -45,9 +46,10 @@ class MantenimientoContainer extends Component {
             
 
         return (
-            <div className="well mb-0">
-                <img src={uso} alt="" />
-                <h2 className="mt-3 mb-4">Mantenimiento</h2>
+            <div className="bggray mb-0 p-4" style={{marginTop: '70px'}}>
+                <div><img src={gear} alt="" style={{marginTop: '-90px', marginBottom: '20px'}}/></div>
+                <div><img src={mantenimiento} alt="" /></div>
+                <h2 className="mt-3 mb-4 fs35">Mantenimiento</h2>
                 <SemaforoComponent headertext={headertext} eventos={eventos}/>
             </div>
         );

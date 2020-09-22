@@ -13,7 +13,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
     return (
         <div>
 
-            <p>{headertext}</p>
+            <p className="fs20">{headertext}</p>
 
             {
                 empty_events.map((item, i) => 
