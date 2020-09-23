@@ -10,7 +10,7 @@ const CambiosPreviosComponent = ( { headertext, eventos } ) => {
                 <div className="card">
                     <div className="mt-card">
                         <img src={reload} alt="" />
-                        <h2 className="mt-3 mb-4 fs35">Cambios previos</h2>
+                        <h2 className="mt-3 mb-4 fs35 cp-title"><b>Cambios previos</b></h2>
                         <SemaforoComponent headertext={headertext} eventos={eventos}/>
                     </div>
                 </div>

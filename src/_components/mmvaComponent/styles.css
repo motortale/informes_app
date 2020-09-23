@@ -44,10 +44,14 @@
         font-size: 25px;
     }
 
+    .fs-20{
+        font-size: 20px;
+    }
+
     .title{
         color: var(--main-blue);
         text-transform: uppercase;
-        font-size: 54px;
+        font-size: 34px;
         font-weight: bold;
     }
 
@@ -57,4 +61,8 @@
 
     .bggrey{
         background-color: #EFEFEF;
+    }
+
+    .fw-light{
+        font-weight: 400;
     }

@@ -10,3 +10,8 @@
 .fs20{
     font-size: 20px;
 }
+
+.bggraygradient{
+    background: rgb(239,239,239);
+    background: linear-gradient(180deg, rgba(239,239,239,1) 56%, rgba(255,255,255,1) 56%);
+}

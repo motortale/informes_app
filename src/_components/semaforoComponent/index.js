@@ -13,7 +13,7 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
     return (
         <div>
 
-            <p className="fs20">{headertext}</p>
+            <p className="fs20"><b>{headertext}</b></p>
 
             {
                 empty_events.map((item, i) => 
@@ -26,13 +26,13 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
             
             {
                 green_events.length > 0 && 
-                <div>
+                <div className="mt-4">
                     <div className="fz-40 green">
                         <svg className="bi bi-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p><b>BANDERA VERDE</b></p>
+                    <p className="fs20"><b>BANDERA VERDE</b></p>
                 </div>
             }
 
@@ -47,13 +47,13 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
 
             {
                 yellow_events.length > 0 && 
-                <div>
+                <div className="mt-4">
                     <div className="fz-40 yellow">
                         <svg className="bi bi-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p><b>BANDERA AMARILLA</b></p>
+                    <p className="fs20"><b>BANDERA AMARILLA</b></p>
                 </div>
             }
 
@@ -69,13 +69,13 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
 
             {
                 red_events.length > 0 && 
-                <div>
+                <div className="mt-4">
                     <div className="fz-40 red">
                         <svg className="bi bi-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="8" cy="8" r="8"></circle>
                         </svg>
                     </div>
-                    <p><b>BANDERA ROJA</b></p>
+                    <p className="fs20"><b>BANDERA ROJA</b></p>
                 </div>
             }
 

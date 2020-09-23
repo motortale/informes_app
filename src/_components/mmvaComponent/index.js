@@ -20,8 +20,8 @@ const MmvaComponent = ({mmva: {dominio, marca, tipoVehiculo, modelo, version, an
                         </div>
                     </div>
                     <div className="row pt-5">
-                        <div className="col-md-4 text-center fz-25">
-                            <p contentEditable="true" suppressContentEditableWarning={true}>{ moment().format('L') }</p>
+                        <div className="col-md-4 text-left pl-5 fs-20">
+                            <p contentEditable="true" suppressContentEditableWarning={true} className="mb-1">{ moment().format('L') }</p>
                             <p contentEditable="true" suppressContentEditableWarning={true}>#2043</p>
                         </div>
                         <div className="col-md-4 text-center">
@@ -43,23 +43,23 @@ const MmvaComponent = ({mmva: {dominio, marca, tipoVehiculo, modelo, version, an
                         </div>
                         <div className="col-md-6 text-center">
                             <div className="dato-basico">
-                                <p className="label">Marca</p>
+                                <p className="label fw-light">Marca</p>
                                 <p className="option" contentEditable="true" suppressContentEditableWarning={true}>{marca}</p>
                             </div>
                             <div className="dato-basico">
-                                <p className="label">Modelo</p>
+                                <p className="label fw-light">Modelo</p>
                                 <p className="option" contentEditable="true" suppressContentEditableWarning={true}>{modelo} {version}</p>
                             </div>
                             <div className="dato-basico">
-                                <p className="label">Año</p>
+                                <p className="label fw-light">Año</p>
                                 <p className="option" contentEditable="true" suppressContentEditableWarning={true}>{ano}</p>
                             </div>
                             <div className="dato-basico">
-                                <p className="label">Registrado en</p>
+                                <p className="label fw-light">Registrado en</p>
                                 <p className="option" contentEditable="true" suppressContentEditableWarning={true}>Adrogue N°5 (01264)</p>
                             </div>
                             <div className="dato-basico">
-                                <p className="label">Patente bimestral</p>
+                                <p className="label fw-light">Patente bimestral</p>
                                 <p className="option" contentEditable="true" suppressContentEditableWarning={true}>$ 2.533,60</p>
                             </div>
                         </div>

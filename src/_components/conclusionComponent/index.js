@@ -6,18 +6,18 @@ import PropTypes from 'prop-types';
 
 const ConclusionComponent = ( {oraciones} ) => {
     return (
-        <div className="bggray pt-4">
+        <div className="bggraygradient pt-4 pb-4">
             <div className="container main-card p-5 ">
                 <img src={conclusionicon} alt="" />
-                <h3 className="mt-4 fs35">Conclusión</h3>
+                <h3 className="mt-4 mb-5 fs35"><b>Conclusión</b></h3>
                 
                 { oraciones.map( (x, i) => <p key={i}>{x}</p> )}
                 
             </div>
 
-            <div className="text-center pt-6"> 
+            {/* <div className="text-center pt-6"> 
                 <img src={gearhalf} alt="gear" />
-            </div>
+            </div> */}
         </div>
     )
 }

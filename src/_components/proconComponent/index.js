@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import sad from "./../../images/sad-icon.svg"
 import happy from "./../../images/happy-icon.svg"
-
+import './styles.css'
 
 const ProConComponent = ( { procon } ) => {
 
@@ -12,7 +12,7 @@ const ProConComponent = ( { procon } ) => {
         <div className="row">
             <div className="col-md-12 text-center mt-5">
                 <img src={sad} alt="" />
-                <h3 className="mt-3 mb-4">Problemas Frecuentes</h3>
+                <h3 className="mt-3 mb-4 pc-title">Problemas Frecuentes</h3>
                 {
                     con.length ? con.map((item, i) => 
                         <p contentEditable="true" key={i} suppressContentEditableWarning={true}>{item.descripcion}</p>
@@ -21,7 +21,7 @@ const ProConComponent = ( { procon } ) => {
             </div>
             <div className="col-md-12 text-center mt-5">
                 <img src={happy} alt="" />
-                <h3 className="mt-3 mb-4">Pros</h3>
+                <h3 className="mt-3 mb-4 pc-title">Pros</h3>
                 {
                     pro.length ? pro.map((item, i) => 
                         <p contentEditable="true" key={i} suppressContentEditableWarning={true}>{item.descripcion}</p>

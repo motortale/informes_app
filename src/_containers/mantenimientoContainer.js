@@ -49,7 +49,7 @@ class MantenimientoContainer extends Component {
             <div className="bggray mb-0 p-4" style={{marginTop: '70px'}}>
                 <div><img src={gear} alt="" style={{marginTop: '-90px', marginBottom: '20px'}}/></div>
                 <div><img src={mantenimiento} alt="" /></div>
-                <h2 className="mt-3 mb-4 fs35">Mantenimiento</h2>
+                <h2 className="mt-3 mb-4 fs35"><b>Mantenimiento</b></h2>
                 <SemaforoComponent headertext={headertext} eventos={eventos}/>
             </div>
         );

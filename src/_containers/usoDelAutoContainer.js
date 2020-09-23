@@ -41,7 +41,7 @@ class UsoDelAutoContainer extends Component {
         return (
             <div>
                 <img src={uso} alt="" />
-                <h2 className="mt-3 mb-4 fs35">Uso del auto</h2>
+                <h2 className="mt-3 mb-4 fs35"><b>Uso del auto</b></h2>
                 <SemaforoComponent headertext={headertext} eventos={eventos}/>
             </div>
         );
