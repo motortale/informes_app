@@ -1,6 +1,6 @@
-export const semaforoConstants = {
-    EMPTY: 0,
-    GREEN: 1,
-    YELLOW: 2,
-    RED: 3
-}
+export const semaforoConstants = Object.freeze({
+    VACIA: 0,
+    VERDE: 1,
+    AMARILLA: 2,
+    ROJA: 3
+})

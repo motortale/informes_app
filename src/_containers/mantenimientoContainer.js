@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
-import mantenimiento from './../images/mantenimiento-icon.svg'
+import mantenimientoIcon from './../images/mantenimiento-icon.svg'
 import gear from './../images/gear-icon.svg'
 import SemaforoComponent from './../_components/semaforoComponent'
 import { eventogrupoConstants, eventoConstants, semaforoConstants } from '../_constants'
@@ -13,32 +13,38 @@ class MantenimientoContainer extends Component {
         const headertext = "Acá va el texto que va a decir qué es el mantenimiento"
 
         if (this.props.payload) {
-            
-            this.props.payload.filter(x => x.id_EventoGrupo == eventogrupoConstants.MANTENIMIENTO && x.id_Evento !== eventoConstants.KILOMETRAJE).map(item => 
-                eventos.push(
-                    { descripcion: item.descripcion, fechaSuceso: item.fechaSuceso, gravedadInforme: item.gravedadInforme }
-                )
-            )
+            var mantenimientos = this.props.payload.filter(x => x.id_EventoGrupo == eventogrupoConstants.MANTENIMIENTO)
+            var id_eventos =  [...new Set(mantenimientos.map(({id_Evento}) => id_Evento))]
 
-            this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(item => eventos.push(
-                { descripcion: `Kilometraje reportado a MOTORTALE: ${item.descripcion}km`, fechaSuceso: item.fechaSuceso, gravedadInforme: item.gravedadInforme }
-            ))
+            var mantenimientos_new = id_eventos.map(function(item){
+                return {
+                        id_evento: item,
+                        gravedadInforme: mantenimientos.filter(x => x.id_Evento == item)[0].gravedadInforme,
+                        eventos: mantenimientos.filter(x => x.id_Evento == item)
+                    };
+            })
 
-            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.RTO).length == 0) 
-                eventos.push(
+            if (mantenimientos.filter(item => item.id_Evento == eventoConstants.RTO).length == 0) 
+                mantenimientos_new.push(
                     {
-                        descripcion: "No hay historial de VTV reportado a MOTORTALE", 
-                        fechaSuceso: "",
-                        gravedadInforme: semaforoConstants.EMPTY
+                        id_evento: eventoConstants.RTO,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "No hay historial de VTV reportado a MOTORTALE.", 
+                            fechaSuceso: ""
+                        }]
                     }
                 )
             
-            if (this.props.payload.filter(item => item.id_EventoGrupo == eventogrupoConstants.MANTENIMIENTO).length == 0) 
-                eventos.push(
+            if (mantenimientos.filter(item => item.id_EventoGrupo == eventoConstants.MANTENIMIENTO).length == 0) 
+                mantenimientos_new.push(
                     {
-                        descripcion: "Atención: El mantenimiento de este vehículo no se realizó en tiempo y forma o fue realizado en un taller/concesionario que no reporta a MOTORTALE. Si el mantenimiento fue realizado correctamente pedile a tu taller que se sume a la Red MOTORTALE! ", 
-                        fechaSuceso: "",
-                        gravedadInforme: semaforoConstants.EMPTY
+                        id_evento: eventoConstants.MANTENIMIENTO,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "Atención: El mantenimiento de este vehículo no se realizó en tiempo y forma o fue realizado en un taller/concesionario que no reporta a MOTORTALE. Si el mantenimiento fue realizado correctamente pedile a tu taller que se sume a la Red MOTORTALE! ", 
+                            fechaSuceso: ""
+                        }]
                     }
                 )
 
@@ -48,9 +54,9 @@ class MantenimientoContainer extends Component {
         return (
             <div className="bggray mb-0 p-4" style={{marginTop: '70px'}}>
                 <div><img src={gear} alt="" style={{marginTop: '-90px', marginBottom: '20px'}}/></div>
-                <div><img src={mantenimiento} alt="" /></div>
+                <div><img src={mantenimientoIcon} alt="" /></div>
                 <h2 className="mt-3 mb-4 fs35"><b>Mantenimiento</b></h2>
-                <SemaforoComponent headertext={headertext} eventos={eventos}/>
+                <SemaforoComponent headertext={headertext} eventos={mantenimientos_new}/>
             </div>
         );
     }

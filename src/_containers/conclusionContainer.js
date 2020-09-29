@@ -95,13 +95,13 @@ class ConclusionContainer extends Component {
 
             // Fin Siniestros
 
-
             if (eventosAgrupados.filter(x => x.id_evento_grupo == eventogrupoConstants.MANTENIMIENTO ).length == 0)
                 this.state.conclusion.push(`No se ha reportado mantenimiento del vehículo`)
 
             if (eventosAgrupados.filter(x => x.id_evento == eventoConstants.SINIESTRO).length == 0)
                 this.state.conclusion.push(`No se han reportado siniestros del vehículo.`)
 
+            console.log("agrup", eventosAgrupados)
 
             eventosAgrupados.map(x => {
                 switch (x.id_evento) {
@@ -140,10 +140,6 @@ class ConclusionContainer extends Component {
                         case eventoConstants.TRANSFERENCIA:
                             this.state.conclusion.push("El vehiculo tiene una transferencia reportada, lo que significa que no es primer/único dueño.")
                             break;  
-
-                        // case eventoConstants.SINIESTRO:
-                        //     this.state.conclusion.push("CAMBIAR - El vehiculo tuvo siniestros")
-                        //     break; 
 
                         case eventoConstants.GNC:
                             this.state.conclusion.push("En el vehículo se ha reportado instalación de GNC. Si bien el GNC moderno no suele generar desgaste, el uso y mantenimiento que se le suele dar a los autos equipados con este sistema sí.")

@@ -14,10 +14,6 @@ const ConclusionComponent = ( {oraciones} ) => {
                 { oraciones.map( (x, i) => <p key={i}>{x}</p> )}
                 
             </div>
-
-            {/* <div className="text-center pt-6"> 
-                <img src={gearhalf} alt="gear" />
-            </div> */}
         </div>
     )
 }

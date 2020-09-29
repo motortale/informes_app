@@ -1,15 +1,19 @@
-.yellow {
+div.amarilla {
     color: yellow;
 }
 
-.green {
+div.verde {
     color: green;
 }
 
-.red {
+div.roja {
     color: red;
 }
 
 .fz-40 {
     font-size: 40px;
+}
+
+.vacia{
+    display: none;
 }

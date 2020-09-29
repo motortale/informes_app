@@ -14,25 +14,70 @@ class UsoDelAutoContainer extends Component {
             
             var usodelauto = this.props.payload.filter(x => x.id_EventoGrupo == eventogrupoConstants.USO_DEL_AUTO)
             
-            usodelauto.map(item => eventos.push(
-                {descripcion: item.descripcion, fechaSuceso: item.fechaSuceso, gravedadInforme: item.gravedadInforme}
-            ))
+            var id_eventos =  [...new Set(usodelauto.map(({id_Evento}) => id_Evento))]
 
-            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0) 
-                eventos.push(
+            var usodelauto_new = id_eventos.filter(x => x != eventoConstants.INFRACCION_VELOCIDAD && x != eventoConstants.INFRACCION).map(function(item){
+                return {
+                        id_evento: item,
+                        gravedadInforme: usodelauto.filter(x => x.id_Evento == item)[0].gravedadInforme,
+                        eventos: usodelauto.filter(x => x.id_Evento == item)
+                    };
+            })
+
+            if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length > 0) {
+                let eventos = usodelauto.filter(x => x.id_Evento == eventoConstants.INFRACCION || x.id_Evento == eventoConstants.INFRACCION_VELOCIDAD)
+                let gravedadInforme = semaforoConstants.VACIA
+
+                if (eventos.length > 10) 
+                    gravedadInforme = semaforoConstants.AMARILLA
+
+                if (eventos.length > 20) 
+                    gravedadInforme = semaforoConstants.ROJA
+
+                usodelauto_new.push(
                     {
-                        descripcion: "No se han reportado siniestros en el historial del vehículo", 
-                        fechaSuceso: "",
-                        gravedadInforme: semaforoConstants.EMPTY
+                        id_evento: eventoConstants.INFRACCION,
+                        eventos,
+                        gravedadInforme
+                    }
+                )
+            }
+
+            
+
+            if (usodelauto.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0)                 
+                usodelauto_new.push(
+                    {
+                        id_evento: eventoConstants.SINIESTRO,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "No se han reportado siniestros en el historial del vehículo.", 
+                            fechaSuceso: ""
+                        }]
                     }
                 )
 
-            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.TRANSFERENCIA).length == 0) 
-                eventos.push(
+            if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length == 0) 
+                usodelauto_new.push(
                     {
-                        descripcion: "No se ha reportado cambio de dueño/radicación.", 
-                        fechaSuceso: "",
-                        gravedadInforme: semaforoConstants.EMPTY
+                        id_evento: eventoConstants.SINIESTRO,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "No se han reportado siniestros en el historial del vehículo", 
+                            fechaSuceso: ""
+                        }]
+                    }
+                )
+
+            if (usodelauto.filter(item => item.id_Evento == eventoConstants.TRANSFERENCIA).length == 0) 
+                usodelauto_new.push(
+                    {
+                        id_evento: eventoConstants.TRANSFERENCIA,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "No se ha reportado cambio de dueño/radicación.", 
+                            fechaSuceso: ""
+                        }]
                     }
                 )
             
@@ -42,7 +87,7 @@ class UsoDelAutoContainer extends Component {
             <div>
                 <img src={uso} alt="" />
                 <h2 className="mt-3 mb-4 fs35"><b>Uso del auto</b></h2>
-                <SemaforoComponent headertext={headertext} eventos={eventos}/>
+                <SemaforoComponent headertext={headertext} eventos={usodelauto_new}/>
             </div>
         );
     }
