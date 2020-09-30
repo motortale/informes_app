@@ -5,7 +5,8 @@ export function eventos(state = {}, action) {
   switch (action.type) {
     case vehiculoConstants.GETEVENTOSBYDOMINIO_REQUEST:
       return {
-        loading: true
+        loading: true,
+        payload: undefined
       };
     case vehiculoConstants.GETEVENTOSBYDOMINIO_SUCCESS:
       return {

@@ -60,10 +60,10 @@ class UsoDelAutoContainer extends Component {
             if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length == 0) 
                 usodelauto_new.push(
                     {
-                        id_evento: eventoConstants.SINIESTRO,
+                        id_evento: eventoConstants.INFRACCION,
                         gravedadInforme: semaforoConstants.VACIA,
                         eventos: [{
-                            descripcion: "No se han reportado siniestros en el historial del vehículo", 
+                            descripcion: "No se han reportado infracciones en el historial de éste vehículo.", 
                             fechaSuceso: ""
                         }]
                     }

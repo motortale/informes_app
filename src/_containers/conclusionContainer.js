@@ -106,7 +106,6 @@ class ConclusionContainer extends Component {
             if (eventosAgrupados.filter(x => x.id_evento == eventoConstants.SINIESTRO).length == 0)
                 this.state.conclusion.push(`No se han reportado siniestros del vehículo.`)
 
-            console.log("agrup", eventosAgrupados)
 
             eventosAgrupados.map(x => {
                 switch (x.id_evento) {
@@ -156,22 +155,24 @@ class ConclusionContainer extends Component {
                         
                         case eventoConstants.KILOMETRAJE:
                             let ano_vehiculo = this.props.payload2 ? this.props.payload2[0].ano : 0
-                            let ano_actual = moment().year()
 
-                            let kilometrajes = this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => {
-                                    let ano_suceso = moment(x.fechaSuceso).year()
+                            if (ano_vehiculo != 0) {
+                                let ano_actual = moment().year()
 
-                                    return(
-                                        (x.descripcion / (ano_suceso - ano_vehiculo)) * (ano_actual - ano_vehiculo)
-                                    )
-                                }
-                            )
+                                let kilometrajes = this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => {
+                                        let ano_suceso = moment(x.fechaSuceso).year()
 
-                            let kilometraje_calculado = this.average(kilometrajes)
-                            let kilometraje_reportado_maximo = Math.max(...kilometrajes)
-                            
+                                        return(
+                                            (x.descripcion / (ano_suceso - ano_vehiculo)) * (ano_actual - ano_vehiculo)
+                                        )
+                                    }
+                                )
 
-                            this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${Math.round(kilometraje_reportado_maximo)} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${Math.round(kilometraje_calculado)} kms. al día de la fecha.`)
+                                let kilometraje_calculado = this.average(kilometrajes)
+                                let kilometraje_reportado_maximo = Math.max(...this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => x.descripcion))
+                                
+                                this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${Math.round(kilometraje_reportado_maximo)} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${Math.round(kilometraje_calculado)} kms. al día de la fecha.`)   
+                            }
                             break; 
                         
                         case eventoConstants.ROBO:
@@ -186,12 +187,16 @@ class ConclusionContainer extends Component {
         }
     }
 
+    componentDidUpdate() {
 
-    render() {
         const eventosAgrupados = this.props.payload ? 
             this.agruparEventos(this.props.payload.map(({id_Evento, id_EventoGrupo, gravedadInforme }) => ({id_Evento, id_EventoGrupo, gravedadInforme })))  : []
 
         this.crearOraciones(eventosAgrupados)
+
+    }
+
+    render() {
 
         return (
             <ConclusionComponent oraciones={this.state.conclusion}/> 
