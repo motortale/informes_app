@@ -171,7 +171,7 @@ class ConclusionContainer extends Component {
                             let kilometraje_reportado_maximo = Math.max(...kilometrajes)
                             
 
-                            this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${kilometraje_reportado_maximo} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${kilometraje_calculado} kms. al día de la fecha.`)
+                            this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${Math.round(kilometraje_reportado_maximo)} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${Math.round(kilometraje_calculado)} kms. al día de la fecha.`)
                             break; 
                         
                         case eventoConstants.ROBO:
