@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ConclusionComponent from './../_components/conclusionComponent'
 import { eventoConstants, eventogrupoConstants } from '../_constants'
+import moment from 'moment'
 
 class ConclusionContainer extends Component {
     constructor(props){
@@ -33,6 +34,10 @@ class ConclusionContainer extends Component {
         })
 
         return ret;
+    }
+
+    average (array) {
+        return array.reduce((a, b) => a + b) / array.length;
     }
 
     //TODO: Toda esta lógica debería estar acá?
@@ -150,7 +155,23 @@ class ConclusionContainer extends Component {
                             break; 
                         
                         case eventoConstants.KILOMETRAJE:
-                            this.state.conclusion.push("Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a xxx.xxx kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente (xxx.xxx/año reporte - año vehículo * 2020 - año vehículo) kms. al día de la fecha.")
+                            let ano_vehiculo = this.props.payload2 ? this.props.payload2[0].ano : 0
+                            let ano_actual = moment().year()
+
+                            let kilometrajes = this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => {
+                                    let ano_suceso = moment(x.fechaSuceso).year()
+
+                                    return(
+                                        (x.descripcion / (ano_suceso - ano_vehiculo)) * (ano_actual - ano_vehiculo)
+                                    )
+                                }
+                            )
+
+                            let kilometraje_calculado = this.average(kilometrajes)
+                            let kilometraje_reportado_maximo = Math.max(...kilometrajes)
+                            
+
+                            this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${kilometraje_reportado_maximo} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${kilometraje_calculado} kms. al día de la fecha.`)
                             break; 
                         
                         case eventoConstants.ROBO:
@@ -194,9 +215,11 @@ ConclusionContainer.propTypes = {
 }
 
 function mapStateToProps(state) {
-    const { eventos } = state;
+    const { eventos, mmva } = state;
+    const { payload: payload2 } = mmva
     const { payload } = eventos
     return {
+        payload2,
         payload
     };
 }
