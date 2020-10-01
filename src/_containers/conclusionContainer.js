@@ -46,8 +46,8 @@ class ConclusionContainer extends Component {
     crearOraciones(eventosAgrupados){
 
         if (eventosAgrupados.length > 0) {
-            this.state.conclusion = []
             
+
             var fue_taxi = eventosAgrupados.filter(x => x.id_evento == eventoConstants.TAXI).length > 0
             var tuvo_gnc = eventosAgrupados.filter(x => x.id_evento == eventoConstants.GNC).length > 0
 
@@ -160,6 +160,7 @@ class ConclusionContainer extends Component {
                             let ano_vehiculo = this.props.payload2 ? this.props.payload2[0].ano : 0
 
                             if (ano_vehiculo != 0) {
+                                debugger
                                 let ano_actual = moment().year()
 
                                 let kilometrajes = this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => {
@@ -190,17 +191,12 @@ class ConclusionContainer extends Component {
         }
     }
 
-    componentDidUpdate() {
-
+    render() {
+        
         const eventosAgrupados = this.props.payload ? 
             this.agruparEventos(this.props.payload.map(({id_Evento, id_EventoGrupo, gravedadInforme }) => ({id_Evento, id_EventoGrupo, gravedadInforme })))  : []
 
         this.crearOraciones(eventosAgrupados)
-
-    }
-
-    render() {
-
         return (
             <ConclusionComponent oraciones={this.state.conclusion}/> 
         );

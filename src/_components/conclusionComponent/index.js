@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles.css'
 import conclusionicon from "./../../images/conclusion-icon.svg"
-import gearhalf from "./../../images/gear-half-icon.svg"
 import PropTypes from 'prop-types';
 
 const ConclusionComponent = ( {oraciones} ) => {
