@@ -9,7 +9,7 @@ import { eventogrupoConstants, eventoConstants, semaforoConstants } from '../_co
 class MantenimientoContainer extends Component {
 
     render() {
-        const eventos = []
+        
         const headertext = "Acá va el texto que va a decir qué es el mantenimiento"
 
         if (this.props.payload) {

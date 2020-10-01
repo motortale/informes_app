@@ -4,25 +4,37 @@ import SemaforoComponent from './../_components/semaforoComponent'
 import { eventogrupoConstants, eventoConstants, semaforoConstants } from '../_constants'
 import uso from './../images/uso-icon.svg'
 import PropTypes from 'prop-types';
+import { groupBy } from './../_functions'
 
 class UsoDelAutoContainer extends Component {
+    
     render() {
-        const eventos = []
         const headertext = "Acá va el texto que va a decir qué son los USO DEL AUTO"
 
         if (this.props.payload) {
-            
-            var usodelauto = this.props.payload.filter(x => x.id_EventoGrupo == eventogrupoConstants.USO_DEL_AUTO)
-            
-            var id_eventos =  [...new Set(usodelauto.map(({id_Evento}) => id_Evento))]
 
-            var usodelauto_new = id_eventos.filter(x => x != eventoConstants.INFRACCION_VELOCIDAD && x != eventoConstants.INFRACCION).map(function(item){
-                return {
-                        id_evento: item,
-                        gravedadInforme: usodelauto.filter(x => x.id_Evento == item)[0].gravedadInforme,
-                        eventos: usodelauto.filter(x => x.id_Evento == item)
+            let usodelauto = JSON.parse(JSON.stringify(this.props.payload.filter(x => x.id_EventoGrupo == eventogrupoConstants.USO_DEL_AUTO))).map(function(evento){
+
+                if (evento.id_Evento == eventoConstants.SINIESTRO && evento.gravedadInforme == semaforoConstants.VERDE) 
+                    evento.gravedadInforme = semaforoConstants.AMARILLA
+
+                return evento
+            })
+
+
+            var eventos_agrupados = groupBy(usodelauto, function (item) {
+                return [item.id_Evento, item.gravedadInforme];
+            });
+
+            
+            var usodelauto_new = eventos_agrupados.map(function(eventos){
+                return  {
+                        id_evento: eventos[0].id_Evento,
+                        gravedadInforme: eventos[0].gravedadInforme,
+                        eventos
                     };
             })
+
 
             if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length > 0) {
                 let eventos = usodelauto.filter(x => x.id_Evento == eventoConstants.INFRACCION || x.id_Evento == eventoConstants.INFRACCION_VELOCIDAD)
@@ -43,8 +55,7 @@ class UsoDelAutoContainer extends Component {
                 )
             }
 
-            
-
+                        
             if (usodelauto.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0)                 
                 usodelauto_new.push(
                     {
@@ -57,6 +68,7 @@ class UsoDelAutoContainer extends Component {
                     }
                 )
 
+            
             if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length == 0) 
                 usodelauto_new.push(
                     {

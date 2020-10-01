@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ConclusionComponent from './../_components/conclusionComponent'
 import { eventoConstants, eventogrupoConstants } from '../_constants'
+import { average } from './../_functions'
 import moment from 'moment'
 
 class ConclusionContainer extends Component {
@@ -17,11 +18,13 @@ class ConclusionContainer extends Component {
     agruparEventos(eventos){
         let ret = []
 
+        
+
         eventos.map(function(evento) {
-            var itemInArray = ret.filter(x => x.id_evento == evento.id_Evento)
+            var itemInArray = ret.filter(x => x.id_evento == evento.id_Evento && x.gravedadInforme == evento.gravedadInforme)
 
             if (itemInArray.length > 0) 
-                ret.filter(x => x.id_evento == evento.id_Evento)[0].cantidad++
+                ret.filter(x => x.id_evento == evento.id_Evento && x.gravedadInforme == evento.gravedadInforme)[0].cantidad++
             else
                 ret.push(
                     {
@@ -33,18 +36,18 @@ class ConclusionContainer extends Component {
                 )
         })
 
+        console.log("asd", ret)
+        debugger;
+
         return ret;
     }
 
-    average (array) {
-        return array.reduce((a, b) => a + b) / array.length;
-    }
-
-    //TODO: Toda esta lógica debería estar acá?
+    
     crearOraciones(eventosAgrupados){
 
-        if (eventosAgrupados.length > 0){
-
+        if (eventosAgrupados.length > 0) {
+            this.state.conclusion = []
+            
             var fue_taxi = eventosAgrupados.filter(x => x.id_evento == eventoConstants.TAXI).length > 0
             var tuvo_gnc = eventosAgrupados.filter(x => x.id_evento == eventoConstants.GNC).length > 0
 
@@ -168,7 +171,7 @@ class ConclusionContainer extends Component {
                                     }
                                 )
 
-                                let kilometraje_calculado = this.average(kilometrajes)
+                                let kilometraje_calculado = average(kilometrajes)
                                 let kilometraje_reportado_maximo = Math.max(...this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => x.descripcion))
                                 
                                 this.state.conclusion.push(`Se reportaron registros de kilometraje. Verificar que el kilometraje actual no sea inferior al reportado en este MOTORTALE. Si el kilometraje actual fuese inferior a ${Math.round(kilometraje_reportado_maximo)} kms. podría tratarse de un odómetro adulterado. Al ritmo del kilometraje reportado, este vehículo debería tener aproximadamente ${Math.round(kilometraje_calculado)} kms. al día de la fecha.`)   
