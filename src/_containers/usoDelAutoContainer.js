@@ -26,18 +26,19 @@ class UsoDelAutoContainer extends Component {
                 return [item.id_Evento, item.gravedadInforme];
             });
 
-            
-            var usodelauto_new = eventos_agrupados.map(function(eventos){
-                return  {
-                        id_evento: eventos[0].id_Evento,
-                        gravedadInforme: eventos[0].gravedadInforme,
-                        eventos
-                    };
+
+            var usodelauto_new = eventos_agrupados.filter(evento => evento[0].id_Evento != eventoConstants.INFRACCION_VELOCIDAD && evento[0].id_Evento != eventoConstants.INFRACCION)
+                .map(function(eventos){
+                    return  {
+                            id_evento: eventos[0].id_Evento,
+                            gravedadInforme: eventos[0].gravedadInforme,
+                            eventos
+                        };
             })
 
-
-            if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length > 0) {
-                let eventos = usodelauto.filter(x => x.id_Evento == eventoConstants.INFRACCION || x.id_Evento == eventoConstants.INFRACCION_VELOCIDAD)
+            
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.INFRACCION || item.id_Evento == eventoConstants.INFRACCION_VELOCIDAD).length > 0) {
+                let eventos = this.props.payload.filter(x => x.id_Evento == eventoConstants.INFRACCION || x.id_Evento == eventoConstants.INFRACCION_VELOCIDAD)
                 let gravedadInforme = semaforoConstants.VACIA
 
                 if (eventos.length > 10) 
@@ -56,7 +57,7 @@ class UsoDelAutoContainer extends Component {
             }
 
                         
-            if (usodelauto.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0)                 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.SINIESTRO).length == 0)                 
                 usodelauto_new.push(
                     {
                         id_evento: eventoConstants.SINIESTRO,
@@ -69,7 +70,7 @@ class UsoDelAutoContainer extends Component {
                 )
 
             
-            if (usodelauto.filter(item => item.id_Evento == eventoConstants.INFRACCION).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.INFRACCION || item.id_Evento == eventoConstants.INFRACCION_VELOCIDAD).length == 0) 
                 usodelauto_new.push(
                     {
                         id_evento: eventoConstants.INFRACCION,
@@ -81,7 +82,7 @@ class UsoDelAutoContainer extends Component {
                     }
                 )
 
-            if (usodelauto.filter(item => item.id_Evento == eventoConstants.TRANSFERENCIA).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.TRANSFERENCIA).length == 0) 
                 usodelauto_new.push(
                     {
                         id_evento: eventoConstants.TRANSFERENCIA,
@@ -92,6 +93,7 @@ class UsoDelAutoContainer extends Component {
                         }]
                     }
                 )
+
             
         }
 

@@ -54,7 +54,7 @@ class CambiosPreviosContainer extends Component {
                         id_evento: eventoConstants.GNC,
                         gravedadInforme: semaforoConstants.VACIA,
                         eventos: [{
-                            descripcion: "No se ha reportado al vehículo como participante de pruebas/eventos en autódromos", 
+                            descripcion: "No se ha reportado al vehículo con instalación de GNC (Gas Natural Comprimido).", 
                             fechaSuceso: ""
                         }]
                     })

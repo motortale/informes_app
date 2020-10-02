@@ -12,10 +12,11 @@ const SemaforoComponent = ( {headertext, eventos} ) => {
             
             {
                 eventos && eventos.map((item, i) => {
+                    
                     const color = Object.keys(semaforoConstants).find(key => semaforoConstants[key] === item.gravedadInforme).toLowerCase()
                     
                     return (
-                        <div key={i}>
+                        <div key={i} className="mt-5">
                             <div className={color}>
                                 <svg className="bi bi-circle-fill fz-40" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="8" cy="8" r="8"></circle>

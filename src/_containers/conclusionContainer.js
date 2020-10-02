@@ -18,8 +18,6 @@ class ConclusionContainer extends Component {
     agruparEventos(eventos){
         let ret = []
 
-        
-
         eventos.map(function(evento) {
             var itemInArray = ret.filter(x => x.id_evento == evento.id_Evento && x.gravedadInforme == evento.gravedadInforme)
 
@@ -35,9 +33,6 @@ class ConclusionContainer extends Component {
                     }
                 )
         })
-
-        console.log("asd", ret)
-        debugger;
 
         return ret;
     }
@@ -160,7 +155,6 @@ class ConclusionContainer extends Component {
                             let ano_vehiculo = this.props.payload2 ? this.props.payload2[0].ano : 0
 
                             if (ano_vehiculo != 0) {
-                                debugger
                                 let ano_actual = moment().year()
 
                                 let kilometrajes = this.props.payload.filter(x => x.id_Evento == eventoConstants.KILOMETRAJE).map(x => {
@@ -192,7 +186,7 @@ class ConclusionContainer extends Component {
     }
 
     render() {
-        
+        this.state.conclusion = []
         const eventosAgrupados = this.props.payload ? 
             this.agruparEventos(this.props.payload.map(({id_Evento, id_EventoGrupo, gravedadInforme }) => ({id_Evento, id_EventoGrupo, gravedadInforme })))  : []
 
