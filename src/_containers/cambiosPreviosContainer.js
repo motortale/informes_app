@@ -25,7 +25,7 @@ class CambiosPreviosContainer extends Component {
             })
 
             
-            if (cambiosprevios.length == 0) 
+            if (this.props.payload.length == 0) 
                 cambiosprevios_new.push(
                     {
                         id_evento: eventoConstants.MODIFICACION,
@@ -36,7 +36,7 @@ class CambiosPreviosContainer extends Component {
                         }]
                     })
             
-            if (cambiosprevios.filter(item => item.id_evento == eventoConstants.AUTODROMO).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.AUTODROMO).length == 0) 
                 cambiosprevios_new.push(
                     {
                         id_evento: eventoConstants.AUTODROMO,
@@ -47,8 +47,9 @@ class CambiosPreviosContainer extends Component {
                         }]
                     })
             
-
-            if (cambiosprevios.filter(item => item.id_evento == eventoConstants.GNC).length == 0) 
+            debugger;
+            var asd = this.props.payload.filter(item => item.id_Evento == eventoConstants.GNC)
+            if (asd.length == 0) 
                 cambiosprevios_new.push(
                     {
                         id_evento: eventoConstants.GNC,
@@ -60,7 +61,7 @@ class CambiosPreviosContainer extends Component {
                     })
             
 
-            if (cambiosprevios.filter(item => item.id_evento == eventoConstants.TAXI).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.TAXI).length == 0) 
                 cambiosprevios_new.push(
                     {
                         id_evento: eventoConstants.TAXI,
