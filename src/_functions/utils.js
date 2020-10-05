@@ -1,3 +1,4 @@
+import moment from 'moment'
 
 export const groupBy = (array, f) =>{
         let groups = {};
@@ -14,4 +15,8 @@ export const groupBy = (array, f) =>{
 
 export const average = (array) => {
     return array.reduce((a, b) => a + b) / array.length;
+}
+
+export const antiguedad_vehiculo = (ano_fabricacion) => {
+    return moment().year() - ano_fabricacion
 }

@@ -5,6 +5,8 @@ import mantenimientoIcon from './../images/mantenimiento-icon.svg'
 import gear from './../images/gear-icon.svg'
 import SemaforoComponent from './../_components/semaforoComponent'
 import { eventogrupoConstants, eventoConstants, semaforoConstants } from '../_constants'
+import { antiguedad_vehiculo } from './../_functions'
+
 
 class MantenimientoContainer extends Component {
 
@@ -23,6 +25,21 @@ class MantenimientoContainer extends Component {
                         eventos: mantenimientos.filter(x => x.id_Evento == item)
                     };
             })
+
+            if (mantenimientos.filter(item => item.id_Evento == eventoConstants.RTO).length == 0) {
+                let antiguedad = this.props.payload2 ? antiguedad_vehiculo(this.props.payload2[0].ano) : 0
+                if (antiguedad <= 3)
+                    mantenimientos_new.push(
+                        {
+                            id_evento: eventoConstants.RTO,
+                            gravedadInforme: semaforoConstants.VERDE,
+                            eventos: [{
+                                descripcion: "Los vehículos con menos de 3 años aún no precisan realizar VTV/RTO.", 
+                                fechaSuceso: ""
+                            }]
+                        }
+                    )
+            }
 
             if (mantenimientos.filter(item => item.id_Evento == eventoConstants.RTO).length == 0) 
                 mantenimientos_new.push(
@@ -78,11 +95,13 @@ MantenimientoContainer.propTypes = {
 }
 
 function mapStateToProps(state){
-    const {eventos}  = state
-    const {payload} = eventos
+    const { eventos, mmva } = state;
+    const { payload: payload2 } = mmva
+    const { payload } = eventos
     return {
+        payload2,
         payload
-    }
+    };
 }
 
 export default connect(mapStateToProps, null)(MantenimientoContainer)
