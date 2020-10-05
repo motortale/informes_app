@@ -69,6 +69,18 @@ class UsoDelAutoContainer extends Component {
                     }
                 )
 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.DEUDA_PATENTE).length == 0)                 
+                usodelauto_new.push(
+                    {
+                        id_evento: eventoConstants.DEUDA_PATENTE,
+                        gravedadInforme: semaforoConstants.VACIA,
+                        eventos: [{
+                            descripcion: "El vehículo no reporta deuda patente.", 
+                            fechaSuceso: ""
+                        }]
+                    }
+                )
+
             
             if (this.props.payload.filter(item => item.id_Evento == eventoConstants.INFRACCION || item.id_Evento == eventoConstants.INFRACCION_VELOCIDAD).length == 0) 
                 usodelauto_new.push(

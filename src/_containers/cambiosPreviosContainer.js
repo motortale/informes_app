@@ -24,30 +24,28 @@ class CambiosPreviosContainer extends Component {
                     };
             })
 
-            
-            if (this.props.payload.length == 0) 
+            if (cambiosprevios.length == 0) 
                 cambiosprevios_new.push(
                     {
                         id_evento: eventoConstants.MODIFICACION,
-                        gravedadInforme: semaforoConstants.VACIA,
+                        gravedadInforme: semaforoConstants.VERDE,
                         eventos: [{
                             descripcion: "No se han reportado otras modificaciones al vehículo.", 
                             fechaSuceso: ""
                         }]
                     })
             
-            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.AUTODROMO).length == 0) 
+            if (this.props.payload.filter(item => item.id_Evento == eventoConstants.PRENSA_PRUEBA).length == 0) 
                 cambiosprevios_new.push(
                     {
-                        id_evento: eventoConstants.AUTODROMO,
+                        id_evento: eventoConstants.PRENSA_PRUEBA,
                         gravedadInforme: semaforoConstants.VACIA,
                         eventos: [{
-                            descripcion: "No se ha reportado al vehículo como participante de pruebas/eventos en autódromos", 
+                            descripcion: "No se ha reportado al vehículo como participante de pruebas.", 
                             fechaSuceso: ""
                         }]
                     })
             
-            debugger;
             var asd = this.props.payload.filter(item => item.id_Evento == eventoConstants.GNC)
             if (asd.length == 0) 
                 cambiosprevios_new.push(

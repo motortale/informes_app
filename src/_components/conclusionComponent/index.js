@@ -10,7 +10,7 @@ const ConclusionComponent = ( {oraciones} ) => {
                 <img src={conclusionicon} alt="" />
                 <h3 className="mt-4 mb-5 fs35"><b>Conclusión</b></h3>
                 
-                { oraciones.map( (x, i) => <p key={i}>{x}</p> )}
+                { oraciones.map( (x, i) => <p contentEditable="true" suppressContentEditableWarning={true} key={i}>{x}</p> )}
                 
             </div>
         </div>
