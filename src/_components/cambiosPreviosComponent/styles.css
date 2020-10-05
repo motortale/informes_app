@@ -15,3 +15,12 @@ div.card{
     text-transform: uppercase;
     font-size: 34px;
 }
+
+.lengua {
+    margin-top: -47px;
+    margin-bottom: 40px;
+}
+
+.br10{
+    border-radius: 0px 0px 10px 10px;
+}

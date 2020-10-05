@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles.css'
 import reload from "./../../images/reload-icon.svg"
+import lengua from "./../../images/lengua.png"
 import SemaforoComponent from './../../_components/semaforoComponent'
 import PropTypes from 'prop-types';
 
@@ -9,7 +10,8 @@ const CambiosPreviosComponent = ( { headertext, eventos } ) => {
             <div className="container mt-5 mb-5">
                 <div className="card">
                     <div className="mt-card">
-                        <img src={reload} alt="" />
+                        <div className="lengua"><img src={lengua} alt="" className="br10" /></div>
+                        <div className=""><img src={reload} alt="" /></div>
                         <h2 className="mt-3 mb-4 fs35 cp-title"><b>Cambios previos</b></h2>
                         <SemaforoComponent headertext={headertext} eventos={eventos}/>
                     </div>
